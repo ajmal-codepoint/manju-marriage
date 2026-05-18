@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manju Weds Rajan · 5th June 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #d4a843;
+      --gold-light: #f0c878;
+      --gold-dark: #a8832e;
+      --ivory: #f5f0e8;
+      --ivory-dim: rgba(245,240,232,0.75);
+      --bg1: #0f0720;
+      --bg2: #1e0d3a;
+      --bg3: #2e1550;
+      --glass: rgba(255,255,255,0.07);
+      --glass-border: rgba(212,168,67,0.35);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 20% 10%, #2a0f4a 0%, #0f0720 45%),
+                  radial-gradient(ellipse at 80% 90%, #1e0d3a 0%, #0a0418 60%);
+      background-attachment: fixed;
+      font-family: 'Lato', sans-serif;
+      color: var(--ivory);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ── Stars ────────────────────────────────────────────── */
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .star {
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: #fff;
+      animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.15; transform: scale(1); }
+      50%       { opacity: 1;    transform: scale(1.6); }
+    }
+
+    /* ── Floating petals ──────────────────────────────────── */
+    .petal {
+      position: fixed;
+      top: -60px;
+      font-size: var(--size, 1.4rem);
+      opacity: 0.55;
+      animation: fall var(--fdur, 10s) linear var(--fdelay, 0s) infinite;
+      pointer-events: none;
+      z-index: 0;
+      user-select: none;
+    }
+
+    @keyframes fall {
+      0%   { transform: translateY(-80px) rotate(0deg); opacity: 0.6; }
+      80%  { opacity: 0.4; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ── Confetti ─────────────────────────────────────────── */
+    .confetti-piece {
+      position: fixed;
+      top: -20px;
+      width: 10px; height: 10px;
+      border-radius: 2px;
+      animation: confetti-fall var(--cdur, 4s) ease-in var(--cdelay, 0s) forwards;
+      pointer-events: none;
+      z-index: 200;
+    }
+
+    @keyframes confetti-fall {
+      0%   { transform: translateY(0) rotate(0deg) translateX(0); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg) translateX(var(--cx, 0px)); opacity: 0; }
+    }
+
+    /* ── Layout ───────────────────────────────────────────── */
+    .page {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: clamp(1.5rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem);
+      gap: clamp(1.5rem, 4vw, 2.5rem);
+      text-align: center;
+    }
+
+    /* ── Top ornament SVG ─────────────────────────────────── */
+    .ornament {
+      width: clamp(220px, 55vw, 480px);
+      opacity: 0.85;
+      filter: drop-shadow(0 0 8px rgba(212,168,67,0.5));
+    }
+
+    /* ── Names ────────────────────────────────────────────── */
+    .couple-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.75rem, 2.5vw, 1rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.85;
+    }
+
+    .couple-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(3.2rem, 13vw, 7.5rem);
+      line-height: 1;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold), #c89020, var(--gold-light));
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 5s ease infinite;
+      filter: drop-shadow(0 2px 18px rgba(212,168,67,0.45));
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50%       { background-position: 100% 50%; }
+    }
+
+    .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 3.5vw, 1.5rem);
+      color: var(--ivory-dim);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Divider ──────────────────────────────────────────── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      width: clamp(200px, 60vw, 480px);
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    .divider-icon {
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
+
+    /* ── Event date pill ──────────────────────────────────── */
+    .event-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.9rem, 3vw, 1.25rem);
+      letter-spacing: 0.12em;
+      color: var(--ivory);
+      background: rgba(212,168,67,0.12);
+      border: 1px solid rgba(212,168,67,0.3);
+      border-radius: 50px;
+      padding: 0.5rem 1.6rem;
+      backdrop-filter: blur(6px);
+    }
+
+    /* ── Countdown grid ───────────────────────────────────── */
+    .countdown {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: clamp(0.75rem, 3vw, 1.5rem);
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: clamp(90px, 20vw, 150px);
+      height: clamp(100px, 22vw, 160px);
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 20px rgba(212,168,67,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    /* glow ring on seconds card */
+    .card.seconds::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 23px;
+      background: conic-gradient(var(--gold), transparent 60%, transparent 80%, var(--gold));
+      animation: spin-ring 2s linear infinite;
+      z-index: -1;
+      opacity: 0.5;
+    }
+
+    @keyframes spin-ring {
+      to { transform: rotate(360deg); }
+    }
+
+    .card-number {
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 8vw, 4rem);
+      color: var(--gold-light);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      filter: drop-shadow(0 0 10px rgba(240,200,120,0.5));
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .card-number.flip {
+      animation: flip-num 0.35s ease-out;
+    }
+
+    @keyframes flip-num {
+      0%   { transform: rotateX(0deg)   scale(1);    opacity: 1; }
+      40%  { transform: rotateX(90deg)  scale(0.85); opacity: 0.3; }
+      60%  { transform: rotateX(-15deg) scale(1.05); opacity: 0.8; }
+      100% { transform: rotateX(0deg)   scale(1);    opacity: 1; }
+    }
+
+    .card-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.65rem, 2vw, 0.85rem);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.8;
+      margin-top: 0.35rem;
+    }
+
+    /* ── Blessing ─────────────────────────────────────────── */
+    .blessing {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.95rem, 3vw, 1.2rem);
+      color: var(--ivory-dim);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    /* ── Celebration overlay ──────────────────────────────── */
+    .celebration {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      animation: fadeIn 1s ease;
+    }
+    .celebration.active { display: flex; }
+
+    .celebration-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(3rem, 12vw, 6rem);
+      background: linear-gradient(135deg, #fff, var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 20px rgba(212,168,67,0.6));
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    /* ── Bottom ornament ──────────────────────────────────── */
+    .bottom-ornament {
+      opacity: 0.5;
+      font-size: 1.5rem;
+      color: var(--gold);
+      letter-spacing: 0.5rem;
+    }
+
+    /* ── Responsive tweaks ────────────────────────────────── */
+    @media (max-width: 480px) {
+      .countdown { gap: 0.6rem; }
+      .card { border-radius: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Stars -->
+<div class="stars" id="stars"></div>
+
+<!-- Floating petals -->
+<div id="petals"></div>
+
+<!-- Main page -->
+<main class="page">
+
+  <!-- Top ornamental SVG -->
+  <svg class="ornament" viewBox="0 0 480 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="og" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%"   stop-color="#d4a843" stop-opacity="0"/>
+        <stop offset="25%"  stop-color="#d4a843" stop-opacity="0.9"/>
+        <stop offset="50%"  stop-color="#f0c878"/>
+        <stop offset="75%"  stop-color="#d4a843" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <!-- centre diamond -->
+    <polygon points="240,10 252,30 240,50 228,30" fill="#d4a843" opacity="0.9"/>
+    <!-- left branch -->
+    <path d="M228,30 C200,30 180,20 140,22" stroke="url(#og)" stroke-width="1.5" fill="none"/>
+    <path d="M180,22 C175,14 168,10 160,15" stroke="#d4a843" stroke-width="1" fill="none" opacity="0.7"/>
+    <path d="M160,22 C155,14 148,10 140,15" stroke="#d4a843" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="140" cy="22" r="3" fill="#d4a843" opacity="0.8"/>
+    <circle cx="110" cy="24" r="2" fill="#d4a843" opacity="0.5"/>
+    <path d="M140,22 C120,22 105,18 80,20" stroke="url(#og)" stroke-width="1.2" fill="none"/>
+    <circle cx="80" cy="20" r="2.5" fill="#d4a843" opacity="0.6"/>
+    <path d="M80,20 C60,20 40,18 10,20" stroke="url(#og)" stroke-width="1" fill="none"/>
+    <!-- right branch (mirror) -->
+    <path d="M252,30 C280,30 300,20 340,22" stroke="url(#og)" stroke-width="1.5" fill="none"/>
+    <path d="M300,22 C305,14 312,10 320,15" stroke="#d4a843" stroke-width="1" fill="none" opacity="0.7"/>
+    <path d="M320,22 C325,14 332,10 340,15" stroke="#d4a843" stroke-width="1" fill="none" opacity="0.5"/>
+    <circle cx="340" cy="22" r="3" fill="#d4a843" opacity="0.8"/>
+    <circle cx="370" cy="24" r="2" fill="#d4a843" opacity="0.5"/>
+    <path d="M340,22 C360,22 375,18 400,20" stroke="url(#og)" stroke-width="1.2" fill="none"/>
+    <circle cx="400" cy="20" r="2.5" fill="#d4a843" opacity="0.6"/>
+    <path d="M400,20 C420,20 440,18 470,20" stroke="url(#og)" stroke-width="1" fill="none"/>
+    <!-- tiny leaf accents -->
+    <ellipse cx="200" cy="20" rx="6" ry="3" fill="#d4a843" opacity="0.4" transform="rotate(-20 200 20)"/>
+    <ellipse cx="280" cy="20" rx="6" ry="3" fill="#d4a843" opacity="0.4" transform="rotate(20 280 20)"/>
+  </svg>
+
+  <!-- Names -->
+  <div class="couple-wrapper">
+    <p class="eyebrow">Together Forever</p>
+    <h1 class="couple-names">Manju &amp; Rajan</h1>
+    <p class="tagline">are joyfully getting married</p>
+  </div>
+
+  <!-- Divider -->
+  <div class="divider">
+    <div class="divider-line"></div>
+    <span class="divider-icon">❧</span>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- Event date -->
+  <p class="event-date">Friday &nbsp;·&nbsp; 5th June 2026 &nbsp;·&nbsp; 11:00 AM</p>
+
+  <!-- Countdown -->
+  <div class="countdown" id="countdown">
+    <div class="card" id="card-days">
+      <span class="card-number" id="num-days">--</span>
+      <span class="card-label">Days</span>
+    </div>
+    <div class="card" id="card-hours">
+      <span class="card-number" id="num-hours">--</span>
+      <span class="card-label">Hours</span>
+    </div>
+    <div class="card" id="card-minutes">
+      <span class="card-number" id="num-minutes">--</span>
+      <span class="card-label">Minutes</span>
+    </div>
+    <div class="card seconds" id="card-seconds">
+      <span class="card-number" id="num-seconds">--</span>
+      <span class="card-label">Seconds</span>
+    </div>
+  </div>
+
+  <!-- Celebration (shown after countdown reaches zero) -->
+  <div class="celebration" id="celebration">
+    <p class="eyebrow" style="font-size:1rem; letter-spacing:0.3em;">The Big Day is Here</p>
+    <p class="celebration-title">Manju &amp; Rajan</p>
+    <p class="tagline" style="font-size:1.4rem; color:var(--gold-light);">Wishing you a lifetime of love &amp; happiness! 🎉</p>
+  </div>
+
+  <!-- Blessing -->
+  <p class="blessing">
+    "Two souls, one journey — join us in celebrating love, laughter, and happily ever after."
+  </p>
+
+  <!-- Bottom ornament -->
+  <p class="bottom-ornament">✦ &nbsp; ♥ &nbsp; ✦</p>
+
+  <!-- Bottom SVG mirror -->
+  <svg class="ornament" viewBox="0 0 480 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="transform:scaleY(-1); opacity:0.6">
+    <use href="#og"/>
+    <polygon points="240,10 252,30 240,50 228,30" fill="#d4a843" opacity="0.9"/>
+    <path d="M228,30 C200,30 180,20 140,22" stroke="url(#og)" stroke-width="1.5" fill="none"/>
+    <circle cx="140" cy="22" r="3" fill="#d4a843" opacity="0.8"/>
+    <path d="M140,22 C120,22 105,18 80,20" stroke="url(#og)" stroke-width="1.2" fill="none"/>
+    <circle cx="80" cy="20" r="2.5" fill="#d4a843" opacity="0.6"/>
+    <path d="M80,20 C60,20 40,18 10,20" stroke="url(#og)" stroke-width="1" fill="none"/>
+    <path d="M252,30 C280,30 300,20 340,22" stroke="url(#og)" stroke-width="1.5" fill="none"/>
+    <circle cx="340" cy="22" r="3" fill="#d4a843" opacity="0.8"/>
+    <path d="M340,22 C360,22 375,18 400,20" stroke="url(#og)" stroke-width="1.2" fill="none"/>
+    <circle cx="400" cy="20" r="2.5" fill="#d4a843" opacity="0.6"/>
+    <path d="M400,20 C420,20 440,18 470,20" stroke="url(#og)" stroke-width="1" fill="none"/>
+  </svg>
+
+</main>
+
+<script>
+(function () {
+  /* ── Stars ──────────────────────────────────────────────── */
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 120; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      --dur:${2 + Math.random()*4}s;
+      --delay:${Math.random()*5}s;
+      width:${Math.random() < 0.2 ? 3 : 2}px;
+      height:${Math.random() < 0.2 ? 3 : 2}px;
+    `;
+    starsEl.appendChild(s);
+  }
+
+  /* ── Petals ─────────────────────────────────────────────── */
+  const petalEl = document.getElementById('petals');
+  const petalSymbols = ['🌸','🌺','🌷','✿','❀','🌹'];
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.textContent = petalSymbols[Math.floor(Math.random() * petalSymbols.length)];
+    p.style.cssText = `
+      left:${Math.random()*100}%;
+      --size:${0.9 + Math.random()*1.2}rem;
+      --fdur:${8 + Math.random()*10}s;
+      --fdelay:${Math.random()*12}s;
+    `;
+    petalEl.appendChild(p);
+  }
+
+  /* ── Confetti burst on load ──────────────────────────────── */
+  const confettiColors = ['#d4a843','#f0c878','#e06080','#9060c0','#60a0e0','#e8e8e8','#ff8fa0'];
+  function spawnConfetti() {
+    for (let i = 0; i < 55; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti-piece';
+      const color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+      const x = (Math.random() - 0.5) * 600;
+      c.style.cssText = `
+        left:${10 + Math.random()*80}%;
+        background:${color};
+        --cdur:${2.5 + Math.random()*3}s;
+        --cdelay:${Math.random()*1.5}s;
+        --cx:${x}px;
+        width:${6 + Math.random()*8}px;
+        height:${6 + Math.random()*8}px;
+        border-radius:${Math.random() > 0.5 ? '50%' : '2px'};
+        opacity:0.9;
+      `;
+      document.body.appendChild(c);
+      c.addEventListener('animationend', () => c.remove());
+    }
+  }
+  spawnConfetti();
+
+  /* ── Countdown logic ─────────────────────────────────────── */
+  const weddingDate = new Date('2026-06-05T11:00:00');
+
+  const numEls = {
+    days:    document.getElementById('num-days'),
+    hours:   document.getElementById('num-hours'),
+    minutes: document.getElementById('num-minutes'),
+    seconds: document.getElementById('num-seconds'),
+  };
+  const countdownEl  = document.getElementById('countdown');
+  const celebrationEl = document.getElementById('celebration');
+
+  const prev = { days: -1, hours: -1, minutes: -1, seconds: -1 };
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function flipEl(el) {
+    el.classList.remove('flip');
+    void el.offsetWidth; // reflow to restart animation
+    el.classList.add('flip');
+  }
+
+  function tick() {
+    const now  = Date.now();
+    const diff = weddingDate.getTime() - now;
+
+    if (diff <= 0) {
+      countdownEl.style.display = 'none';
+      celebrationEl.classList.add('active');
+      spawnConfetti();
+      setTimeout(spawnConfetti, 1500);
+      return;
+    }
+
+    const days    = Math.floor(diff / 86400000);
+    const hours   = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000)  / 60000);
+    const seconds = Math.floor((diff % 60000)    / 1000);
+
+    if (days    !== prev.days)    { numEls.days.textContent    = pad(days);    flipEl(numEls.days);    prev.days    = days; }
+    if (hours   !== prev.hours)   { numEls.hours.textContent   = pad(hours);   flipEl(numEls.hours);   prev.hours   = hours; }
+    if (minutes !== prev.minutes) { numEls.minutes.textContent = pad(minutes); flipEl(numEls.minutes); prev.minutes = minutes; }
+    if (seconds !== prev.seconds) { numEls.seconds.textContent = pad(seconds); flipEl(numEls.seconds); prev.seconds = seconds; }
+  }
+
+  tick();
+  setInterval(tick, 500); // poll twice per second for accuracy
+})();
+</script>
+</body>
+</html>
